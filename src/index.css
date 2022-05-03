@@ -1,0 +1,60 @@
+body {
+  background-color: #191414;
+  color: white;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.list-anime {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.card-anime {
+  /* border: 1px solid red; */
+  height: 350px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgb(31, 31, 31);
+  display: grid;
+  transition: all 0.5s;
+}
+.card-anime:hover {
+  background-color: #3e3e3e;
+}
+.card-anime img {
+  height: 300px;
+  width: 200px;
+  border-radius: 8px;
+}
+.text-card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.text-card div {
+  margin: -15px 0;
+}
+.artist-name {
+  color: #c3c3c3;
+  /* border: 1px solid yellow; */
+}
+.item-name {
+  font-weight: bold;
+  /* border: 1px solid blue; */
+}
+a {
+  text-decoration: none;
+  color: #c3c3c3;
+}
