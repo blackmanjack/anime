@@ -11,8 +11,6 @@ const AnimeDetail = () => {
 
   const [anime, setAnime] = useContext(AnimeContext);
 
-  //console.log("idParams", id);
-
   let list = JSON.parse(localStorage.getItem("listCollection"));
   let NewArray = [];
   useEffect(() => {
@@ -20,7 +18,6 @@ const AnimeDetail = () => {
       for (var ojectNumbers in list) {
         for (let i = 0; i < list[ojectNumbers].data.length; i++) {
           if (list[ojectNumbers].data[i].id == id) {
-            //console.log("loop", list[ojectNumbers]);
             if (NewArray.includes(list[ojectNumbers]) == false) {
               NewArray.push(list[ojectNumbers]);
             }
@@ -32,15 +29,9 @@ const AnimeDetail = () => {
     setAnime(NewArray);
   }, [id]);
 
-  //console.log("ARRAY BARU=>", NewArray);
-
-  //console.log("shit", anime);
-
   const { loading, error, data } = useQuery(GET_DATA_BY_ID, {
     variables: { id: id },
   });
-
-  // sessionStorage.setItem("allEntries", null);
 
   const addNewCollection = async (data) => {
     let colectionname = prompt("Collection Name");
@@ -55,7 +46,7 @@ const AnimeDetail = () => {
     if (existinglist == null) existinglist = [];
 
     let newList = JSON.parse(localStorage.getItem("newCollection"));
-    // console.log("GET dari local", JSON.parse(newList));
+
     localStorage.setItem("newdata", JSON.stringify(newList));
     // Save listCollection back to local storage
     existinglist.push(JSON.parse(localStorage.getItem("newCollection")));

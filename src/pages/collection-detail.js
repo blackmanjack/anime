@@ -6,17 +6,13 @@ const CollectionDetail = () => {
   let { id } = useParams();
   const [formCollection, setFormCollection] = useContext(AnimeContext);
 
-  //console.log("idParams", id);
   let list = JSON.parse(localStorage.getItem("listCollection"));
-
-  //list = list.filter((x) => x.name == item.id);
 
   let NewArray = [];
   useEffect(() => {
     const detailCollection = (id) => {
       for (var ojectNumbers in list) {
         if (list[ojectNumbers].name == id) {
-          //console.log("CARI=>", list[ojectNumbers]);
           if (NewArray.includes(list[ojectNumbers]) == false) {
             NewArray.push(list[ojectNumbers]);
           }
@@ -26,8 +22,6 @@ const CollectionDetail = () => {
     detailCollection(id);
     setFormCollection(NewArray);
   }, [id]);
-
-  //console.log("CollectID=>", formCollection);
 
   return (
     <>

@@ -2,17 +2,12 @@ import { Link } from "react-router-dom";
 import Card from "../component/card";
 
 const ListCollection = () => {
-  // console.log(
-  //   "NEW COLLECTION=>",
-  //   JSON.parse(localStorage.getItem("newCollection"))
-  // );
   let list = JSON.parse(localStorage.getItem("listCollection"));
-  //console.log("LIST COLLECTION=>", list);
 
   const removeItem = (item) => {
     let listColl = JSON.parse(localStorage.getItem("listCollection"));
     var remove = listColl.filter((x) => x.name !== item.name);
-    //console.log("NEW ARRAY", remove);
+
     localStorage.setItem("listCollection", JSON.stringify(remove));
     alert(`Collection:${item.name} has been delete`);
     list = JSON.parse(localStorage.getItem("listCollection"));
