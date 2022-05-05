@@ -10,7 +10,7 @@ const AnimeDetail = () => {
 
   const [anime, setAnime] = useContext(AnimeContext);
 
-  console.log("idParams", id);
+  //console.log("idParams", id);
 
   let list = JSON.parse(localStorage.getItem("listCollection"));
   let NewArray = [];
