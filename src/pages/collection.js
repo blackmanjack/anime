@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Card from "../component/card";
 
 const ListCollection = () => {
   // console.log(
@@ -24,6 +25,7 @@ const ListCollection = () => {
           style={{
             display: "flex",
             justifyContent: "center",
+            margin: "30px",
           }}
         >
           <button>add new collection</button>
@@ -31,15 +33,15 @@ const ListCollection = () => {
         <div className="list-anime">
           {(list || []).map((item, index) => (
             //grid
-            <div key={index} className="card-anime">
+            <Card key={index} className="card-anime">
               <Link to={`/collection/detail/` + item.name}>
-                <p>{item.name}</p>
                 <img src={item.data[0].coverImage.large} alt={item.name}></img>
+                <div>{item.name}</div>
                 <button onClick={() => removeItem(item)}>
                   remove collection
                 </button>
               </Link>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

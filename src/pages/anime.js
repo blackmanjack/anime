@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
+import Card from "../component/card";
 import { GET_ALL_DATA } from "../utils/graphql/query";
 import { ConvertString20 } from "../utils/helper/ConvertString";
 
@@ -15,7 +16,7 @@ const ListAnime = () => {
         <div className="list-anime">
           {(data.Page.media || []).map((item) => (
             //grid
-            <div key={item.id} className="card-anime">
+            <Card key={item.id} className="card-anime">
               <Link to={`/detail/` + item.id}>
                 {/* <a href={`/detail/` + item.id}> */}
                 <img src={item.coverImage.large} alt={item.title.english}></img>
@@ -28,7 +29,7 @@ const ListAnime = () => {
                 </div>
                 {/* </a> */}
               </Link>
-            </div>
+            </Card>
           ))}
         </div>
       </div>
