@@ -89,10 +89,7 @@ const AnimeDetail = () => {
       <div className="test">
         <div>This anime is already in collection:</div>
         {(anime || []).map((item, index) => (
-          <div key={index}>
-            {item.name}
-            {console.log("DATA=>", item.name)}
-          </div>
+          <div key={index}>{item.name}</div>
         ))}
       </div>
     </>

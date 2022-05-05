@@ -16,7 +16,7 @@ const CollectionDetail = () => {
     const detailCollection = (id) => {
       for (var ojectNumbers in list) {
         if (list[ojectNumbers].name == id) {
-          console.log("CARI=>", list[ojectNumbers]);
+          //console.log("CARI=>", list[ojectNumbers]);
           if (NewArray.includes(list[ojectNumbers]) == false) {
             NewArray.push(list[ojectNumbers]);
           }
@@ -27,7 +27,7 @@ const CollectionDetail = () => {
     setFormCollection(NewArray);
   }, [id]);
 
-  console.log("CollectID=>", formCollection);
+  //console.log("CollectID=>", formCollection);
 
   return (
     <>

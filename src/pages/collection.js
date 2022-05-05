@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 const ListCollection = () => {
-  console.log(
-    "NEW COLLECTION=>",
-    JSON.parse(localStorage.getItem("newCollection"))
-  );
+  // console.log(
+  //   "NEW COLLECTION=>",
+  //   JSON.parse(localStorage.getItem("newCollection"))
+  // );
   let list = JSON.parse(localStorage.getItem("listCollection"));
-  console.log("LIST COLLECTION=>", list);
+  //console.log("LIST COLLECTION=>", list);
 
   const removeItem = (item) => {
     let listColl = JSON.parse(localStorage.getItem("listCollection"));
