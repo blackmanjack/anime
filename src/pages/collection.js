@@ -19,20 +19,29 @@ const ListCollection = () => {
 
   return (
     <>
-      <button>add new collection</button>
-      <div className="list-anime">
-        {(list || []).map((item, index) => (
-          //grid
-          <div key={index} className="card-anime">
-            <Link to={`/collection/detail/` + item.name}>
-              <p>{item.name}</p>
-              <img src={item.data[0].coverImage.large} alt={item.name}></img>
-              <button onClick={() => removeItem(item)}>
-                remove collection
-              </button>
-            </Link>
-          </div>
-        ))}
+      <div className="Layout">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <button>add new collection</button>
+        </div>
+        <div className="list-anime">
+          {(list || []).map((item, index) => (
+            //grid
+            <div key={index} className="card-anime">
+              <Link to={`/collection/detail/` + item.name}>
+                <p>{item.name}</p>
+                <img src={item.data[0].coverImage.large} alt={item.name}></img>
+                <button onClick={() => removeItem(item)}>
+                  remove collection
+                </button>
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

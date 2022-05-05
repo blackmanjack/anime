@@ -4,6 +4,7 @@ import { ConvertString20 } from "../utils/helper/ConvertString";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AnimeContext } from "./ContextAnime";
+import Button from "../component/button";
 
 const AnimeDetail = () => {
   let { id } = useParams();
@@ -66,31 +67,33 @@ const AnimeDetail = () => {
 
   return (
     <>
-      <div key={data.Media.id} className="card-anime">
-        <img
-          src={data.Media.coverImage.large}
-          alt={data.Media.title.english}
-        ></img>
-        <div className="text-card">
-          <div>
-            <p className="item-name">
-              {ConvertString20(data.Media.title.romaji)}
-            </p>
+      <div className="Layout">
+        <div key={data.Media.id} className="card-anime">
+          <img
+            src={data.Media.coverImage.large}
+            alt={data.Media.title.english}
+          ></img>
+          <div className="text-card">
+            <div>
+              <p className="item-name">
+                {ConvertString20(data.Media.title.romaji)}
+              </p>
+            </div>
+          </div>
+          <div className="btn-group">
+            <Button onClick={() => addNewCollection(data.Media)}>
+              add to the new collection
+            </Button>
+            <button>add to an existing collection</button>
           </div>
         </div>
-        <div>
-          <button onClick={() => addNewCollection(data.Media)}>
-            add to the new collection
-          </button>
-          <button>add to an existing collection</button>
-        </div>
-      </div>
 
-      <div className="test">
-        <div>This anime is already in collection:</div>
-        {(anime || []).map((item, index) => (
-          <div key={index}>{item.name}</div>
-        ))}
+        <div className="test">
+          <div>This anime is already in collection:</div>
+          {(anime || []).map((item, index) => (
+            <div key={index}>{item.name}</div>
+          ))}
+        </div>
       </div>
     </>
   );

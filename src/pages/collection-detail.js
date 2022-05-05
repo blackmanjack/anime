@@ -31,13 +31,14 @@ const CollectionDetail = () => {
 
   return (
     <>
-      <div>
+      <div className="Layout">
         {(formCollection || []).map((item, index) => (
           <div key={index}>
-            <div>{item.name}</div>
+            <div>Collection Name : {item.name}</div>
             <div>
-              {(item.data || []).map((item) => (
+              {(item.data || []).map((item, index) => (
                 <div key={item.id} className="card-anime">
+                  <div>{index + 1}</div>
                   <div>{item.title.romaji}</div>
                   <div>
                     <img src={item.coverImage.medium} />

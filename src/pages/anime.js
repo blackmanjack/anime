@@ -11,7 +11,7 @@ const ListAnime = () => {
 
   return (
     <>
-      <div>
+      <div className="Layout">
         <div className="list-anime">
           {(data.Page.media || []).map((item) => (
             //grid
