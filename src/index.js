@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import { ApolloProvider } from "@apollo/client";
 
-import client from "./graphql/client";
+import client from "./utils/graphql/client";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

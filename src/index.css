@@ -58,3 +58,10 @@ a {
   text-decoration: none;
   color: #c3c3c3;
 }
+.test {
+  margin-top: 50px;
+  /* border: 2px solid salmon; */
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
