@@ -1,10 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { GET_DATA_BY_ID } from "../utils/graphql/query";
 import { ConvertString20 } from "../utils/helper/ConvertString";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AnimeContext } from "./ContextAnime";
 import Button from "../component/button";
+import IncludeCollection from "../component/collection";
 
 const AnimeDetail = () => {
   let { id } = useParams();
@@ -75,15 +76,21 @@ const AnimeDetail = () => {
             <Button onClick={() => addNewCollection(data.Media)}>
               add to the new collection
             </Button>
-            <button>add to an existing collection</button>
+            <Button>add to an existing collection</Button>
           </div>
         </div>
 
         <div className="test">
-          <div>This anime is already in collection:</div>
-          {(anime || []).map((item, index) => (
-            <div key={index}>{item.name}</div>
-          ))}
+          <div>This item is in collection :</div>
+          {anime.length !== 0 ? (
+            (anime || []).map((item, index) => (
+              <>
+                <IncludeCollection item={item} index={index} />
+              </>
+            ))
+          ) : (
+            <div style={{ color: "red" }}>Not added to any collection yet</div>
+          )}
         </div>
       </div>
     </>
