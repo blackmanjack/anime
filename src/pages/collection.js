@@ -32,10 +32,10 @@ const ListCollection = () => {
               <Link to={`/collection/detail/` + item.name}>
                 <img src={item.data[0].coverImage.large} alt={item.name}></img>
                 <div>{item.name}</div>
-                <button onClick={() => removeItem(item)}>
-                  remove collection
-                </button>
               </Link>
+              <button onClick={() => removeItem(item)}>
+                remove collection
+              </button>
             </Card>
           ))}
         </div>
