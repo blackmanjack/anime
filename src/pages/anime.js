@@ -49,8 +49,8 @@ const ListAnime = () => {
           ))}
         </div>
         <div className="list-btn">
-          <Button onClick={() => PreviousPage()}>Previous</Button>
-          <Button onClick={() => NextPage()}>Next</Button>
+          <Button onClick={() => PreviousPage()}>{`< Previous`}</Button>
+          <Button onClick={() => NextPage()}>{`Next >`}</Button>
         </div>
       </div>
     </>
