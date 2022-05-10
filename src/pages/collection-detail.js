@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AnimeContext } from "./ContextAnime";
 
 const CollectionDetail = () => {
@@ -31,13 +31,15 @@ const CollectionDetail = () => {
             <div>Collection Name : {item.name}</div>
             <div>
               {(item.data || []).map((item, index) => (
-                <div key={item.id} className="card-anime">
-                  <div>{index + 1}</div>
-                  <div>{item.title.romaji}</div>
-                  <div>
-                    <img src={item.coverImage.medium} />
+                <Link to={`/detail/` + item.id}>
+                  <div key={item.id} className="card-anime">
+                    <div>{index + 1}</div>
+                    <div>{item.title.romaji}</div>
+                    <div>
+                      <img src={item.coverImage.medium} />
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
