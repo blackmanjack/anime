@@ -5,9 +5,9 @@ import { AnimeContext } from "../pages/ContextAnime";
 const IncludeCollection = () => {
   const [anime] = useContext(AnimeContext);
   return (anime || []).map((item, index) => (
-    <div>
+    <div key={index}>
       <Link to={`/collection/detail/` + item.name}>
-        <div key={index}>{item.name}</div>
+        <div>{item.name}</div>
       </Link>
     </div>
   ));
