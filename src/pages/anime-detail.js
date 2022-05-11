@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { GET_DATA_BY_ID } from "../utils/graphql/query";
 import { ConvertString20 } from "../utils/helper/ConvertString";
 import { useParams } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AnimeContext } from "./ContextAnime";
 import Button from "../component/button";
 import IncludeCollection from "../component/collection";
@@ -12,9 +12,15 @@ const AnimeDetail = () => {
   let { id } = useParams();
 
   const [anime, setAnime] = useContext(AnimeContext);
+  const [isShow, setIsShow] = useState(true);
+
+  const handleClick = () => {
+    setIsShow(!isShow);
+  };
 
   let list = JSON.parse(localStorage.getItem("listCollection"));
   let NewArray = [];
+
   useEffect(() => {
     const infoCollection = (id) => {
       for (var ojectNumbers in list) {
@@ -36,6 +42,10 @@ const AnimeDetail = () => {
   });
 
   localStorage.setItem("newCollection", JSON.stringify(null));
+
+  // useEffect(() => {
+  //   JSON.parse(localStorage.getItem("listCollection"));
+  // }, [isShow]);
 
   const addNewCollection = async (data) => {
     let colectionname = prompt(
@@ -85,6 +95,11 @@ const AnimeDetail = () => {
     }
   };
 
+  const addData = (getData, newdata) => {
+    console.log("GET DATA=>", getData);
+    console.log("NEW DATA=>", newdata);
+  };
+
   if (loading) return <Loading />;
   if (error) return `Error! ${error.message}`;
 
@@ -107,7 +122,22 @@ const AnimeDetail = () => {
             <Button onClick={() => addNewCollection(data.Media)}>
               add to the new collection
             </Button>
-            <Button>add to an existing collection</Button>
+            {isShow ? (
+              <Button onClick={() => handleClick()}>
+                add to an existing collection
+              </Button>
+            ) : (
+              <div>
+                {list.map((item, index) => (
+                  <>
+                    <div key={index} onClick={() => addData(item, data.Media)}>
+                      {item.name}
+                    </div>
+                  </>
+                ))}
+                <Button onClick={() => handleClick()}>cancel</Button>
+              </div>
+            )}
           </div>
         </div>
 
