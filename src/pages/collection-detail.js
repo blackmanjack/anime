@@ -29,19 +29,30 @@ const CollectionDetail = () => {
         {(formCollection || []).map((item, index) => (
           <div key={index}>
             <div>Collection Name : {item.name}</div>
-            <div>
-              {(item.data || []).map((item, index) => (
-                <Link to={`/detail/` + item.id}>
-                  <div key={item.id} className="card-anime">
-                    <div>{index + 1}</div>
-                    <div>{item.title.romaji}</div>
-                    <div>
-                      <img src={item.coverImage.medium} />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            {item.data.length !== 0 ? (
+              <div>
+                {(item.data || []).map((item, index) => (
+                  <>
+                    <Link to={`/detail/` + item.id}>
+                      <div key={item.id} className="card-anime">
+                        <div>{index + 1}</div>
+                        <div>{item.title.romaji}</div>
+                        <div>
+                          <img
+                            src={item.coverImage.medium}
+                            alt={item.title.romaji}
+                          />
+                        </div>
+                      </div>
+                    </Link>
+                  </>
+                ))}
+              </div>
+            ) : (
+              <div style={{ color: "red" }}>
+                There's no item in this collection
+              </div>
+            )}
           </div>
         ))}
       </div>
