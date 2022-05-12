@@ -13,6 +13,7 @@ const AnimeDetail = () => {
 
   const [anime, setAnime] = useContext(AnimeContext);
   const [isShow, setIsShow] = useState(true);
+  const [notInclude, SetNotInclude] = useState([]);
 
   const handleClick = () => {
     setIsShow(!isShow);
@@ -20,22 +21,43 @@ const AnimeDetail = () => {
 
   let list = JSON.parse(localStorage.getItem("listCollection"));
   let NewArray = [];
+  let NotInclude = [];
 
   useEffect(() => {
     const infoCollection = (id) => {
       for (var ojectNumbers in list) {
-        for (let i = 0; i < list[ojectNumbers].data.length; i++) {
-          if (list[ojectNumbers].data[i].id == id) {
-            if (NewArray.includes(list[ojectNumbers]) == false) {
-              NewArray.push(list[ojectNumbers]);
+        if (list[ojectNumbers].data.length !== 0) {
+          for (let i = 0; i < list[ojectNumbers].data.length; i++) {
+            if (list[ojectNumbers].data[i].id == id) {
+              if (NewArray.includes(list[ojectNumbers]) == false) {
+                NewArray.push(list[ojectNumbers]);
+                // console.log("LIST NEEW =>", NewArray);
+              }
             }
+            //if (list[ojectNumbers].data[i].id == !id) {
+            if (NotInclude.includes(list[ojectNumbers]) == false) {
+              NotInclude.push(list[ojectNumbers]);
+              // console.log("NOt Include=>", NotInclude);
+            }
+            //}
+          }
+        } else {
+          if (NotInclude.includes(list[ojectNumbers]) == false) {
+            NotInclude.push(list[ojectNumbers]);
+            // console.log("NOt Include=>", NotInclude);
           }
         }
       }
     };
     infoCollection(id);
+
+    //console.log("INclude", NewArray);
+    // console.log("tidak ada di collection:=>", NotInclude);
+    SetNotInclude(NotInclude);
     setAnime(NewArray);
   }, [id]);
+
+  //console.log("LIST COLLECTION=>", NotInclude);
 
   const { loading, error, data } = useQuery(GET_DATA_BY_ID, {
     variables: { id: id },
@@ -96,8 +118,23 @@ const AnimeDetail = () => {
   };
 
   const addData = (getData, newdata) => {
-    console.log("GET DATA=>", getData);
-    console.log("NEW DATA=>", newdata);
+    //console.log("GET DATA=>", getData);
+    //console.log("NEW DATA=>", newdata);
+    var existinglist = JSON.parse(localStorage.getItem("listCollection"));
+    //console.log("existinglist=>", existinglist);
+    //find index
+    let objIndex = existinglist.findIndex((obj) => obj.name == getData.name);
+    //console.log("findINdex", objIndex);
+    console.log("check", existinglist[objIndex].data.includes(newdata));
+    if (existinglist[objIndex].data.includes(newdata) == false) {
+      existinglist[objIndex].data.push(newdata);
+    }
+    console.log("Update=>", existinglist);
+    localStorage.setItem("listCollection", JSON.stringify(existinglist));
+    alert(
+      `${newdata.title.romaji} has been added to ${getData.name}'s collection`
+    );
+    setIsShow(!isShow);
   };
 
   if (loading) return <Loading />;
@@ -118,27 +155,6 @@ const AnimeDetail = () => {
               </p>
             </div>
           </div>
-          <div className="btn-group">
-            <Button onClick={() => addNewCollection(data.Media)}>
-              add to the new collection
-            </Button>
-            {isShow ? (
-              <Button onClick={() => handleClick()}>
-                add to an existing collection
-              </Button>
-            ) : (
-              <div>
-                {list.map((item, index) => (
-                  <>
-                    <div key={index} onClick={() => addData(item, data.Media)}>
-                      {item.name}
-                    </div>
-                  </>
-                ))}
-                <Button onClick={() => handleClick()}>cancel</Button>
-              </div>
-            )}
-          </div>
         </div>
 
         <div className="test">
@@ -150,6 +166,27 @@ const AnimeDetail = () => {
           ) : (
             <div style={{ color: "red" }}>Not added to any collection yet</div>
           )}
+          <div className="btn-group">
+            <Button onClick={() => addNewCollection(data.Media)}>
+              add to the new collection
+            </Button>
+            {isShow ? (
+              <Button onClick={() => handleClick()}>
+                add to an existing collection
+              </Button>
+            ) : (
+              <div>
+                {notInclude.map((item, index) => (
+                  <>
+                    <div key={index} onClick={() => addData(item, data.Media)}>
+                      {item.name}
+                    </div>
+                  </>
+                ))}
+                <Button onClick={() => handleClick()}>cancel</Button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>
